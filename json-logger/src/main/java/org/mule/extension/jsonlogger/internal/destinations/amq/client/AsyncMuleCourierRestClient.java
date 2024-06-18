@@ -5,15 +5,12 @@
  */
 package org.mule.extension.jsonlogger.internal.destinations.amq.client;
 
-import com.mulesoft.mq.restclient.impl.OAuthCredentials;
-import com.mulesoft.mq.restclient.internal.Request;
-import com.mulesoft.mq.restclient.internal.RequestBuilder;
-import com.mulesoft.mq.restclient.internal.Response;
-import com.mulesoft.mq.restclient.internal.client.AbstractCourierRestClient;
+
 import org.apache.commons.io.IOUtils;
 import org.mule.runtime.api.scheduler.Scheduler;
 import org.mule.runtime.api.util.MultiMap;
 import org.mule.runtime.http.api.client.HttpClient;
+import org.mule.runtime.http.api.client.HttpRequestOptions;
 import org.mule.runtime.http.api.domain.entity.ByteArrayHttpEntity;
 import org.mule.runtime.http.api.domain.entity.HttpEntity;
 import org.mule.runtime.http.api.domain.entity.multipart.HttpPart;
@@ -30,6 +27,12 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
+
+import com.mulesoft.mq.restclient.client.Request;
+import com.mulesoft.mq.restclient.client.RequestBuilder;
+import com.mulesoft.mq.restclient.client.Response;
+import com.mulesoft.mq.restclient.client.mq.AbstractCourierRestClient;
+import com.mulesoft.mq.restclient.client.mq.domain.OAuthCredentials;
 
 public class AsyncMuleCourierRestClient extends AbstractCourierRestClient {
 
@@ -49,8 +52,9 @@ public class AsyncMuleCourierRestClient extends AbstractCourierRestClient {
     @Override
     protected Observable<Response> process(Request request) {
         logProcessStart(request);
-        return Observable.create(subscriber -> httpClient.sendAsync(((MuleBasedRequest) request).getHttpRequest(),
-                                                                    RESPONSE_TIMEOUT_MILLIS, true, null)
+        return Observable.create(subscriber -> httpClient
+                .sendAsync(((MuleBasedRequest) request).getHttpRequest(), HttpRequestOptions.builder()
+                           .responseTimeout(RESPONSE_TIMEOUT_MILLIS).followsRedirect(true).build())
                 .whenCompleteAsync((response, exception) -> {
                     if (exception != null) {
                         logProcessError(request, exception);
