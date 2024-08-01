@@ -30,6 +30,15 @@
         "isContent": true
       }
     },
+    "cisNumber": {
+      "type": "string",
+      "sdk": {
+        "example": "CIS Number of Customer",
+        "required": true,
+        "summary": "CIS Number of Customer",
+		"default": "#[vars.cisNumber]"
+      }
+    },
     "endpoint": {
       "type": "string",
       "sdk": {
@@ -60,10 +69,11 @@
         "AFTER_FLOW",
         "PRINT",
         "END",
-        "EXCEPTION"
+        "EXCEPTION",
+        "ALERT"
       ],
       "sdk": {
-        "default": "START",
+        "required":true,
         "summary": "Current processing stage"
       }
     },
