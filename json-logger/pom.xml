@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>d226dc16-025c-45f5-b6d4-8a59ef1eb0ca</groupId>
+    <groupId>3682d16e-d636-48bc-9d5e-9c957e9addae</groupId>
     <artifactId>json-logger</artifactId>
-    <version>2.0.9-test</version>
+    <version>3.0.0</version>
     <packaging>mule-extension</packaging>
     <name>JSON Logger - Mule 4</name>
     <properties>
@@ -79,7 +79,7 @@
         <repository>
             <id>anypoint-exchange-v3</id>
             <name>Anypoint Exchange V3</name>
-            <url>https://maven.anypoint.mulesoft.com/api/v3/organizations/${project.groupId}/maven</url>
+            <url>https://maven.anypoint.mulesoft.com/api/v1/organizations/${project.groupId}/maven</url>
             <layout>default</layout>
         </repository>
     </distributionManagement>
@@ -166,16 +166,16 @@
     </dependencies>
     <repositories>
         <!-- Shared Mule Services Repository -->
-        <repository>
-            <id>anypoint-exchange</id>
-            <name>Exchange2 Repository</name>
-            <url>https://maven.anypoint.mulesoft.com/api/v1/organizations/${project.groupId}/maven</url>
-            <layout>default</layout>
-        </repository>
+<!--         <repository> -->
+<!--             <id>anypoint-exchange</id> -->
+<!--             <name>Exchange2 Repository</name> -->
+<!--             <url>https://maven.anypoint.mulesoft.com/api/v1/organizations/${project.groupId}/maven</url> -->
+<!--             <layout>default</layout> -->
+<!--         </repository> -->
         <repository>
             <id>anypoint-exchange-v3</id>
             <name>Anypoint Exchange V3</name>
-            <url>https://maven.anypoint.mulesoft.com/api/v3/organizations/${project.groupId}/maven</url>
+            <url>https://maven.anypoint.mulesoft.com/api/v1/organizations/${project.groupId}/maven</url>
             <layout>default</layout>
         </repository>
     </repositories>
